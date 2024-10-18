@@ -53,3 +53,7 @@ deactivate
 <img src="extract excel sheet and generate graph.JPG">
 
 # When visit this site, please press like the this github
+
+# nightly update
+
+- 10/18 = updated ai coder local to ai coder-ollama-cli, provide instructions on how to setup ollama
