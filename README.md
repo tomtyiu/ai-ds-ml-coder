@@ -36,6 +36,9 @@ env/Scripts/Activate.ps1 //In Powershel
 
 #check if it is working
 pip list
+
+#deactive  Virtual Environment
+deactivate
 ```
 
 # For example
