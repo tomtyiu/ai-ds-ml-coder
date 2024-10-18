@@ -14,7 +14,7 @@ Install dependencies
 !pip install --upgrade --quiet langchain-community unstructured openpyxl
 ```
 
-Create Python Virtual Environment
+Create Python Virtual Environment (For security. highly recommended)
 
 ```shell
 #install nenv to your host Python
