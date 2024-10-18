@@ -40,29 +40,6 @@ pip list
 #deactive  Virtual Environment
 deactivate
 ```
-## How to setup ollama
-- download ollama -  [ollama](https://ollama.com/download)
-- install ollama
-- in command prompt>> ollama run hf.co/legolasyiu/Fireball-Meta-Llama-3.1-8B-Instruct-Agent-0.003-128K-code-ds-Q8_0-GGUF
-
-
-## For AI data science coder: ai-ds-coder-ollama-cli.py
-## commands cli menu:
-```shell
-
-                        Available commands
-    interactive         Start an interactive LLM session
-    load                Load a dataset
-    suggest             LLM suggestions for preprocessing, hyperparameter tuning, or feature engineering
-    train               Train a machine learning model
-    eda                 Generate an EDA report
-    evaluate            Evaluate a trained model
-    crossval            Perform cross-validation
-
-options:
-  -h, --help            show this help message and exit
-```
-
 
 
 # For example
