@@ -5,12 +5,37 @@ This AI DS Coder is fast data scientist coder assistant. It will produce the cod
 
 ## Setup
 
+Install dependencies
 ```shell
 !pip install langchain_community langchain_core
 !pip install transformers langchain_experimental langchain_huggingface langchain_core
 !pip install bitsandbytes
 !pip install --quiet --upgrade langchain langchain-community langchain-chroma langchain_openai langchain-text-splitters pypdf
 !pip install --upgrade --quiet langchain-community unstructured openpyxl
+```
+
+Create Python Virtual Environment
+
+```shell
+#install nenv to your host Python
+pip install virtualenv
+
+#create a new project folder and run command
+python<version> -m venv <virtual-environment-name>
+
+mkdir projectA
+cd projectA
+python3.8 -m venv env
+
+# activate Virtual Environment
+source env/bin/activate
+
+#Note that to activate your virtual environment on Widows, 
+env/Scripts/activate.bat //In CMD
+env/Scripts/Activate.ps1 //In Powershel
+
+#check if it is working
+pip list
 ```
 
 # For example
