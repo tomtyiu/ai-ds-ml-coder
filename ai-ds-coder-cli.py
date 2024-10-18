@@ -1,3 +1,4 @@
+## Created by Thomas Yiu
 import os
 import json
 import pandas as pd
@@ -32,8 +33,10 @@ from dotenv import load_dotenv, dotenv_values
 # loading variables from .env file
 load_dotenv() 
 
+# Huggingface Token, make sure to go to https://huggingface.co/settings/tokens
 HF_TOKEN = os.getenv('HF_TOKEN')
 
+#quantization 4bit for quick response 
 quantization_config = BitsAndBytesConfig(
     load_in_4bit=True,
     bnb_4bit_quant_type="nf4",
@@ -91,7 +94,7 @@ def interactive_menu():
 
 
 def upload_file():
-    file_path = input("Enter the path of the CSV/TXT/JSON/PDF file to upload: ").strip()
+    file_path = input("Enter the path of the Excel/PDF file to upload: ").strip()
 
     if not os.path.exists(file_path):
         print("File does not exist. Please try again.")
@@ -200,12 +203,13 @@ def upload_file():
           #results
           print(results["context"][0].page_content)
           print(results["context"][0].metadata)
-          input_user=input("if it is code, execut the code:yes or no")
+          input_user=input("if it is code, execute the code:yes or no")
           if input_user == "yes":
             get_python_repl(results["context"][0].page_content)
           query = input("USER>>")
           results = rag_chain.invoke({"input":  query})  #"What was Nike's revenue in 2023?"
 
+# python repl to execute code, make run docker or virtual environment
 def get_python_repl(ai_msg):
     python_repl = PythonREPL()
     # You can create the tool to pass to an agent
