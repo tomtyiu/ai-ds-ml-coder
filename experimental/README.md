@@ -71,9 +71,9 @@ Click "Train Model," and the assistant will generate Python code that can be use
 Hyperparameter Tuning:
 
 Click "Suggest Hyperparameter Tuning" to get suggestions for hyperparameter tuning for a random_forest or other models.
-Clear Conversation:
 
-### You can clear the chat by clicking "Clear Conversation."
+### Clear Conversation:
+You can clear the chat by clicking "Clear Conversation."
 
 
 ### Example Commands
