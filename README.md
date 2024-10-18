@@ -5,4 +5,4 @@ This AI DS Coder is fast data scientist coder assistant. It will produce the cod
 
 # For example
 User>>Create a code to load the excel file: /content/Open LLM benchmark comparison.xlsx, extract the data and make sure to extract by model vs the Average 	Ifeval	BBH	MATH Lvl 5	GPQA	MUSR	MMLU-PRO.  Plot the table
-<img src="extract excel sheet and generate graph.JPG" width="200"/>
+<img src="extract excel sheet and generate graph.JPG">
