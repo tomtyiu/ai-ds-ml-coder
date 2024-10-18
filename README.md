@@ -3,7 +3,8 @@ Artificial Intelligence Data science coder for data mining, large data processin
 
 This AI DS Coder is fast data scientist coder assistant. It will produce the code and execute the code.  There is 2 modes.  RAG with files or direct code mode. 
 
-# First we need to install
+## Setup
+
 ```shell
 !pip install langchain_community langchain_core
 !pip install transformers langchain_experimental langchain_huggingface langchain_core
