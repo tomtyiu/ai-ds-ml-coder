@@ -12,6 +12,7 @@ from pathlib import Path
 
 from langchain_ollama import ChatOllama
 
+# follow instructions on download ollama, install ollama, type ollama run hf.co/legolasyiu/Fireball-Meta-Llama-3.1-8B-Instruct-Agent-0.003-128K-code-ds-Q8_0-GGUF
 llm = ChatOllama(
     model="hf.co/legolasyiu/Fireball-Meta-Llama-3.1-8B-Instruct-Agent-0.003-128K-code-ds-Q8_0-GGUF:latest",
     temperature=0.6,
