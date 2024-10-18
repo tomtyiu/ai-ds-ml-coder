@@ -74,9 +74,7 @@ options:
 
 ### Nightly update
 
-- 10/18
-- -updated ai coder local to ai coder-ollama-cli, provide instructions on how to setup ollama.
-- -created ai streamlit application for data scientist
+- 10/18- updated ai coder local to ai coder-ollama-cli, provide instructions on how to setup ollama, created ai streamlit application for data scientist
 
 
 #### When visit this site or clone this page, please press like this github
