@@ -61,4 +61,4 @@ deactivate
 
 - 10/18 = updated ai coder local to ai coder-ollama-cli, provide instructions on how to setup ollama
 
-#### When visit this site or clone this page, please press like the this github
+#### When visit this site or clone this page, please press like this github
