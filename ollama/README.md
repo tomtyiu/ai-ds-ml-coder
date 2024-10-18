@@ -33,107 +33,118 @@ git clone https://github.com/yourusername/llm-data-science-cli.git
 
 Navigate into the project directory:
 
-bash
-Copy code
+```bash
 cd ai-ds-coder-ollama-cli.py
+```
+
 Install the required dependencies:
 
-bash
-Copy code
+```bash
 pip install -r requirements.txt
-Usage
+```
+
+## Usage
 This tool provides a command-line interface for performing various data science tasks. Below are the available commands:
 
 1. Interactive Mode
 Start an interactive session with the LLM:
 
-bash
-Copy code
+```bash
 python ai-ds-coder-ollama-cli.py interactive
+```
 This mode allows you to type in queries and get responses from the LLM.
 
 2. Load Data
 Load a dataset for further processing:
 
-bash
-Copy code
+```bash
 python ai-ds-coder-ollama-cli.py load --file path/to/your/dataset.csv
+```
 
 3. Task Suggestions
 Ask the LLM to suggest steps for preprocessing, hyperparameter tuning, or feature engineering:
 
-bash
-Copy code
+```bash
 python ai-ds-coder-ollama-cli.pyy suggest --task preprocessing
+```
+
 Supported tasks:
 
 preprocessing
 hyperparameter_tuning
 feature_engineering
+
 4. Train a Model
 Train a machine learning model using your dataset:
 
-bash
-Copy code
+```bash
 python ai-ds-coder-ollama-cli.py train --model random_forest --file path/to/your/dataset.csv --target target_column
-Replace random_forest with your preferred model type (e.g., xgboost).
+```
+
+- Replace random_forest with your preferred model type (e.g., xgboost).
 
 5. Generate EDA Report
 Generate an EDA report with customizable plot types:
 
-bash
-Copy code
+```bash
 python ai-ds-coder-ollama-cli.py eda --file path/to/your/dataset.csv --plot all
-Specify plot types such as scatter, heatmap, or all to include different visualizations.
+```
+- Specify plot types such as scatter, heatmap, or all to include different visualizations.
 
 6. Evaluate Model
 Evaluate the performance of a trained model:
 
-bash
-Copy code
+```bash
 python ai-ds-coder-ollama-cli.py evaluate --model random_forest --file path/to/test_data.csv --target target_column
+```
+
 7. Cross-Validation
 Perform cross-validation on a machine learning model:
 
-bash
-Copy code
+```bash
 python ai-ds-coder-ollama-cli.py crossval --model xgboost --file path/to/your/dataset.csv --target target_column
+```
+
 Command Help
 To view help and available commands:
 
-bash
-Copy code
+```bash
 python ai-ds-coder-ollama-cli.py --help
+```
+
 How It Works
 The tool uses an LLM from HuggingFace or other sources to generate Python code based on user input. The generated code is executed within a Python REPL environment to automate various data science tasks. Core functionalities include:
 
-Chat Interaction: Send user queries to the LLM and receive Python code as a response.
-Python REPL: Execute LLM-generated code directly in the terminal.
-Data Processing: Handle loading and preprocessing of datasets (currently supports CSV).
+- Chat Interaction: Send user queries to the LLM and receive Python code as a response.
+- Python REPL: Execute LLM-generated code directly in the terminal.
+- Data Processing: Handle loading and preprocessing of datasets (currently supports CSV).
+
 Environment Variables
 Make sure the OPENAI_API_KEY environment variable is set in your system. This key is required for the tool to communicate with the LLM.
 
-bash
-Copy code
+```bash
 export OPENAI_API_KEY=your_openai_api_key
-Example Workflow
+```
+
+## Example Workflow
 A typical workflow using this tool might look like:
 
-Interactive Mode: Start a chat session with the LLM to explore the tool’s features.
-Load Dataset: Load a dataset for analysis.
-Task Suggestions: Get suggestions for preprocessing or feature engineering.
-Model Training: Train a machine learning model with the LLM-generated code.
-Generate EDA: Generate an EDA report to understand the dataset.
-Model Evaluation: Evaluate the model’s performance.
-Cross-Validation: Run cross-validation to assess model robustness.
-Error Handling
-The tool includes error handling for common issues such as unsupported file types or missing target columns. Error messages provide guidance for troubleshooting.
+- Interactive Mode: Start a chat session with the LLM to explore the tool’s features.
+- Load Dataset: Load a dataset for analysis.
+- Task Suggestions: Get suggestions for preprocessing or feature engineering.
+- Model Training: Train a machine learning model with the LLM-generated code.
+- Generate EDA: Generate an EDA report to understand the dataset.
+- Model Evaluation: Evaluate the model’s performance.
+- Cross-Validation: Run cross-validation to assess model robustness.
 
-License
+## Error Handling
+- The tool includes error handling for common issues such as unsupported file types or missing target columns. Error messages provide guidance for troubleshooting.
+
+## License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-Contributions
+## Contributions
 Contributions are welcome! Please feel free to submit issues, fork the repository, or create pull requests.
 
-Contact
+## Contact
 For any issues or questions, please contact the project maintainer or submit an issue in the GitHub repository.
