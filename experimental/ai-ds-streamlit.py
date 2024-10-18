@@ -14,7 +14,7 @@ HF_TOKEN = os.getenv('HF_TOKEN')
 
 # Set up Hugging Face API client using OpenAI-like interface
 client = OpenAI(
-    base_url="https://e28zttakj3zbw604.us-east-1.aws.endpoints.huggingface.cloud/v1/", 
+    base_url= "" ##pay to use EpistemeAI/Fireball-Meta-Llama-3.1-8B-Instruct-Agent-0.003-128K-code-ds inference service
     api_key=HF_TOKEN
 )
 
