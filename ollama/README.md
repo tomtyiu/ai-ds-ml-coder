@@ -14,20 +14,23 @@ Cross-Validation: Perform cross-validation for different models using LLM-genera
 Prerequisites
 Ensure the following dependencies are installed:
 
-bash
-Copy code
+```bash
 pip install langchain transformers huggingface_hub pandas argparse
+```
+
 Also, ensure you have set up the OPENAI_API_KEY environment variable:
 
-bash
-Copy code
+```bash
 export OPENAI_API_KEY=your_openai_api_key
-Installation
+```
+
+## Installation
 Clone the repository:
 
-bash
-Copy code
+```bash
 git clone https://github.com/yourusername/llm-data-science-cli.git
+```
+
 Navigate into the project directory:
 
 bash
