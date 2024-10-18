@@ -1,6 +1,6 @@
 This is experimental Data science Streamlit Code
 
-Must pay $0.8 dollars to use the LLM
+Must pay $0.8 dollars to use the LLM, please contact for base URL to use
 
 This web chatbot will provide 
 - Chatbot interface for data scientist
