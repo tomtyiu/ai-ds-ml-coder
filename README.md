@@ -45,6 +45,8 @@ deactivate
 - install ollama
 - in command prompt>> ollama run hf.co/legolasyiu/Fireball-Meta-Llama-3.1-8B-Instruct-Agent-0.003-128K-code-ds-Q8_0-GGUF
 
+
+## For AI data science coder: ai-ds-coder-ollama-cli.py
 ## commands cli menu:
 ```shell
 
