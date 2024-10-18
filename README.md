@@ -40,6 +40,10 @@ pip list
 #deactive  Virtual Environment
 deactivate
 ```
+## commands:
+
+
+
 
 # For example
 
