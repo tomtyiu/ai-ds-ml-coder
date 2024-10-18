@@ -45,8 +45,21 @@ deactivate
 - install ollama
 - in command prompt>> ollama run hf.co/legolasyiu/Fireball-Meta-Llama-3.1-8B-Instruct-Agent-0.003-128K-code-ds-Q8_0-GGUF
 
-## commands:
+## commands cli menu:
+```shell
 
+                        Available commands
+    interactive         Start an interactive LLM session
+    load                Load a dataset
+    suggest             LLM suggestions for preprocessing, hyperparameter tuning, or feature engineering
+    train               Train a machine learning model
+    eda                 Generate an EDA report
+    evaluate            Evaluate a trained model
+    crossval            Perform cross-validation
+
+options:
+  -h, --help            show this help message and exit
+```
 
 
 
