@@ -35,7 +35,7 @@ Navigate into the project directory:
 
 bash
 Copy code
-cd llm-data-science-cli
+cd ai-ds-coder-ollama-cli.py
 Install the required dependencies:
 
 bash
@@ -49,7 +49,7 @@ Start an interactive session with the LLM:
 
 bash
 Copy code
-python cli_tool.py interactive
+python ai-ds-coder-ollama-cli.py interactive
 This mode allows you to type in queries and get responses from the LLM.
 
 2. Load Data
@@ -57,13 +57,14 @@ Load a dataset for further processing:
 
 bash
 Copy code
-python cli_tool.py load --file path/to/your/dataset.csv
+python ai-ds-coder-ollama-cli.py load --file path/to/your/dataset.csv
+
 3. Task Suggestions
 Ask the LLM to suggest steps for preprocessing, hyperparameter tuning, or feature engineering:
 
 bash
 Copy code
-python cli_tool.py suggest --task preprocessing
+python ai-ds-coder-ollama-cli.pyy suggest --task preprocessing
 Supported tasks:
 
 preprocessing
@@ -74,7 +75,7 @@ Train a machine learning model using your dataset:
 
 bash
 Copy code
-python cli_tool.py train --model random_forest --file path/to/your/dataset.csv --target target_column
+python ai-ds-coder-ollama-cli.py train --model random_forest --file path/to/your/dataset.csv --target target_column
 Replace random_forest with your preferred model type (e.g., xgboost).
 
 5. Generate EDA Report
@@ -82,7 +83,7 @@ Generate an EDA report with customizable plot types:
 
 bash
 Copy code
-python cli_tool.py eda --file path/to/your/dataset.csv --plot all
+python ai-ds-coder-ollama-cli.py eda --file path/to/your/dataset.csv --plot all
 Specify plot types such as scatter, heatmap, or all to include different visualizations.
 
 6. Evaluate Model
@@ -90,19 +91,19 @@ Evaluate the performance of a trained model:
 
 bash
 Copy code
-python cli_tool.py evaluate --model random_forest --file path/to/test_data.csv --target target_column
+python ai-ds-coder-ollama-cli.py evaluate --model random_forest --file path/to/test_data.csv --target target_column
 7. Cross-Validation
 Perform cross-validation on a machine learning model:
 
 bash
 Copy code
-python cli_tool.py crossval --model xgboost --file path/to/your/dataset.csv --target target_column
+python ai-ds-coder-ollama-cli.py crossval --model xgboost --file path/to/your/dataset.csv --target target_column
 Command Help
 To view help and available commands:
 
 bash
 Copy code
-python cli_tool.py --help
+python ai-ds-coder-ollama-cli.py --help
 How It Works
 The tool uses an LLM from HuggingFace or other sources to generate Python code based on user input. The generated code is executed within a Python REPL environment to automate various data science tasks. Core functionalities include:
 
