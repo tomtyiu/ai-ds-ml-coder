@@ -25,7 +25,14 @@ from langchain_core.vectorstores import InMemoryVectorStore
 from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import UnstructuredExcelLoader
+# importing os module for environment variables
+import os
+# importing necessary functions from dotenv library
+from dotenv import load_dotenv, dotenv_values 
+# loading variables from .env file
+load_dotenv() 
 
+HF_TOKEN = os.getenv('HF_TOKEN')
 
 quantization_config = BitsAndBytesConfig(
     load_in_4bit=True,
