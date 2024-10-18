@@ -41,7 +41,7 @@ pip list
 deactivate
 ```
 ## How to setup ollama
-- download ollama -  (ollama)[https://ollama.com/download]
+- download ollama -  [ollama](https://ollama.com/download)
 - install ollama
 - in command prompt>> ollama run hf.co/legolasyiu/Fireball-Meta-Llama-3.1-8B-Instruct-Agent-0.003-128K-code-ds-Q8_0-GGUF
 
@@ -57,8 +57,8 @@ deactivate
 
 <img src="extract excel sheet and generate graph.JPG">
 
-## When visit this site, please press like the this github
+### When visit this site or clone this page, please press like the this github
 
-## nightly update
+### nightly update
 
 - 10/18 = updated ai coder local to ai coder-ollama-cli, provide instructions on how to setup ollama
