@@ -66,7 +66,7 @@ The assistant will describe key features of the dataset, missing values, statist
 
 ### Train a Machine Learning Model:
 
-Enter a model type (e.g., random_forest, mistral, etc.) and specify the target column of the dataset.
+Enter a model type (e.g., random_forest, XGBoost, etc.) and specify the target column of the dataset.
 Click "Train Model," and the assistant will generate Python code that can be used to train the specified model.
 Hyperparameter Tuning:
 
