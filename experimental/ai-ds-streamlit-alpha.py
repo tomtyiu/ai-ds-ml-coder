@@ -97,7 +97,7 @@ if st.button("Generate EDA Report"):
 
 # Train Model Button
 st.write("### Train a Model")
-model_name = st.text_input("Enter the model type (e.g., llama, mistral, gpt):", "mistralai/Mistral-7B-Instruct-v0.3")
+model_name = st.text_input("Enter the model type (e.g., Random Forest, XGBoost, Decision Tree):", "Random Forest")
 target_column = st.text_input("Enter the target column for training:")
 
 if st.button("Train Model"):
