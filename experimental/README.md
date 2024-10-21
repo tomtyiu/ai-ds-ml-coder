@@ -1,7 +1,7 @@
 This is experimental Data science Streamlit Code
 
-Must pay $0.8 dollars to use the LLM, please contact for base URL to use
-
+Must pay $0.8 dollars to use the LLM, please contact for base URL to use for Huggingface model
+For OpenAI, please contact us for price.
 
 # AI-Powered Data Science Assistant
 
