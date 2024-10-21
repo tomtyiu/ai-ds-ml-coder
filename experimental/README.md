@@ -5,7 +5,11 @@ Must pay $0.8 dollars to use the LLM, please contact for base URL to use
 
 # AI-Powered Data Science Assistant
 
-This project provides a **Streamlit-based** user interface for interacting with an **LLM-powered Data Science Assistant**. It allows users to upload datasets, perform exploratory data analysis (EDA), train machine learning models, and even tune hyperparameters with the help of a language model. The LLM (Large Language Model) backend is powered by Hugging Face's `OpenAI`-like API for seamless integration.
+This project provides a **Streamlit-based** user interface for interacting with an **LLM-powered Data Science Assistant**. It allows users to upload datasets, perform exploratory data analysis (EDA), train machine learning models, and even tune hyperparameters with the help of a language model. The LLM (Large Language Model) backend is powered by Hugging Face's `OpenAI`-like API for seamless integration. Easily change to OpenAI model.
+
+## OpenAI models: 
+**Complex Reasoning model** o1-preview-2024-09-12, o1-mini-2024-09-12  
+**Advance GPT model** chatgpt-4o-latest, gpt-4o-mini-2024-07-18
 
 ## Features:
 - **Upload CSV Data**: Load a CSV file to perform data analysis.
