@@ -99,5 +99,5 @@ Chat Errors: If the assistant doesn't respond correctly, check the API rate limi
 
 # Price
 - Must pay $0.8 dollars to use the LLM, please contact for base URL to use for Huggingface model
-- For OpenAI, please contact us for price.
+- For OpenAI, please contact us for price and key
 
