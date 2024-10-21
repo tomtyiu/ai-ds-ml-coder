@@ -16,10 +16,7 @@ load_dotenv()
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 # Set up Hugging Face API client using OpenAI-like interface
-client = OpenAI(
-    base_url="https://api.openai.com/v1/chat/completions",  # Example base URL
-    api_key=OPENAI_API_KEY 
-)
+client = OpenAI()
 
 # Initialize session state for chatbot and dataset
 if 'data' not in st.session_state:
