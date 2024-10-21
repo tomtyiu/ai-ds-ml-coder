@@ -1,7 +1,5 @@
 This is experimental Data science Streamlit Code
 
-Must pay $0.8 dollars to use the LLM, please contact for base URL to use for Huggingface model
-For OpenAI, please contact us for price.
 
 # AI-Powered Data Science Assistant
 
@@ -98,3 +96,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Invalid API Key: Make sure your .env file contains the correct Hugging Face token.
 - File Upload Errors: Ensure that you are uploading a valid CSV file.
 Chat Errors: If the assistant doesn't respond correctly, check the API rate limits on your Hugging Face account.
+
+# Price
+- Must pay $0.8 dollars to use the LLM, please contact for base URL to use for Huggingface model
+- For OpenAI, please contact us for price.
+
