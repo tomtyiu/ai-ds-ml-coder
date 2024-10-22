@@ -1,7 +1,7 @@
 This is experimental Data science Streamlit Code
 
 
-# AI-Powered Data Science Assistant
+# AI-Powered Data Science(DS) and Machine Learning (ML) Assistant
 
 This project provides a **Streamlit-based** user interface for interacting with an **LLM-powered Data Science Assistant**. It allows users to upload datasets, perform exploratory data analysis (EDA), train machine learning models, and even tune hyperparameters with the help of a language model. The LLM (Large Language Model) backend is powered by Hugging Face's `OpenAI`-like API for seamless integration. Easily change to OpenAI model.
 
