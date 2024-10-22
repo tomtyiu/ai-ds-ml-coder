@@ -89,6 +89,12 @@ Configuration
 The assistant is powered by Hugging Face's OpenAI-like API. You can replace the model name in the code with a model of your choice, such as tgi or EpistemeAI/Fireball-Meta-Llama-3.1-8B-Instruct-Agent-0.003-128K-code-ds.
 Modify the HF_TOKEN in the .env file with your Hugging Face API token.
 
+## Generate graph
+- Generate bar or line graph of the CSV file for easy analysis 
+
+## Previewof table of the CSV 
+- provide preview table of the CSV file
+
 ### License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
