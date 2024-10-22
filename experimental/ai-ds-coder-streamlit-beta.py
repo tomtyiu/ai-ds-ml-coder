@@ -54,7 +54,7 @@ def load_data(uploaded_file):
     return False
 
 # Streamlit Layout
-st.title("LLM-Powered Data Science Assistant")
+st.title("LLM-Powered Data Science/ML Assistant")
 st.write("Upload your dataset and interact with the assistant to train models, generate EDA reports, and more.")
 
 # Dropdown for selecting OpenAI model
