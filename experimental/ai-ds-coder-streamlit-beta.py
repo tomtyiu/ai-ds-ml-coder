@@ -3,6 +3,7 @@
 
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt  # Import matplotlib for plotting
 from openai import OpenAI 
 import os
 from dotenv import load_dotenv 
@@ -10,13 +11,12 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-# Hugging Face Token, ensure you have it from https://huggingface.co/settings/tokens
-#HF_TOKEN = os.getenv('HF_TOKEN')
+openai_api_key = st.sidebar.text_input("OpenAI API Key", type="password")
 
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+#OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
-# Set up Hugging Face API client using OpenAI-like interface
-client = OpenAI()
+# Set up OpenAI API client
+client = OpenAI(api_key=openai_api_key)
 
 # Initialize session state for chatbot and dataset
 if 'data' not in st.session_state:
@@ -24,17 +24,15 @@ if 'data' not in st.session_state:
 if 'messages' not in st.session_state:
     st.session_state['messages'] = []
 
-# Function to communicate with LLM using Hugging Face API
-def chat_with_llm(query, model):
+# Function to communicate with LLM using OpenAI API
+def chat_with_llm(query, model, dataset_summary=None):
+    if dataset_summary:
+        query = f"{dataset_summary}\n\n{query}"  # Include dataset context in the query
     try:
-        # Call the API without streaming
         completion = client.chat.completions.create(
             model=model,
             messages=[{"role": "user", "content": query}]
-            # Remove stream=True as it is not supported by this model
         )
-
-        # Get the response content
         response_content = completion.choices[0].message.content
         return response_content.strip()
     except Exception as e:
@@ -54,7 +52,7 @@ def load_data(uploaded_file):
     return False
 
 # Streamlit Layout
-st.title("LLM-Powered Data Science/ML Assistant")
+st.title("LLM-Powered Data Science Assistant")
 st.write("Upload your dataset and interact with the assistant to train models, generate EDA reports, and more.")
 
 # Dropdown for selecting OpenAI model
@@ -81,7 +79,13 @@ if uploaded_file:
 
 # Display chatbot interaction
 if query:
-    response = chat_with_llm(query, selected_model)  # Use the selected model here
+    # Generate a summary of the dataset
+    if st.session_state['data'] is not None:
+        dataset_summary = st.session_state['data'].describe(include='all').to_string()  # Summarize the dataset
+        response = chat_with_llm(query, selected_model, dataset_summary)
+    else:
+        response = chat_with_llm(query, selected_model)
+
     st.session_state['messages'].append({"user": query, "assistant": response})
     st.text_input("Ask something (or type a command):", value="", key="input")  # Reset input field
 
@@ -91,131 +95,42 @@ for message in st.session_state['messages']:
     st.markdown(f"**Assistant:** {message['assistant']}")
 
 # EDA Report Button
-st.write("### Generate EDA Report")
-if st.button("Generate EDA Report"):
+st.write("### Generate Comprehensive EDA Report")
+if st.button("Generate Comprehensive EDA Report"):
     if st.session_state['data'] is not None:
-        response = chat_with_llm("Write a EDA report for the dataset in HTML format.", selected_model)
-        st.markdown("#### EDA Report")
+        # Generate a summary of the dataset for the assistant
+        dataset_summary = st.session_state['data'].describe(include='all').to_string()  # Summarize the dataset
+        response = chat_with_llm("Please provide a comprehensive EDA report for the uploaded dataset.", selected_model, dataset_summary)
+        
+        st.markdown("#### Comprehensive EDA Report")
         st.markdown(response, unsafe_allow_html=True)
-        st.session_state['messages'].append({"user": "Generate EDA Report", "assistant": response})
+        st.session_state['messages'].append({"user": "Generate Comprehensive EDA Report", "assistant": response})
     else:
         st.error("Please upload a dataset first.")
 
-# Data Imputation Button
-st.write("### Data Imputation")
-if st.button("Suggest Data Imputation"):
-    if st.session_state['data'] is not None:
-        response = chat_with_llm("Suggest data imputation steps for missing values in the dataset.", selected_model)
-        st.markdown("#### Data Imputation Suggestions")
-        st.markdown(response)
-        st.session_state['messages'].append({"user": "Suggest Data Imputation", "assistant": response})
-    else:
-        st.error("Please upload a dataset first.")
-
-# Feature Engineering Button
-st.write("### Feature Engineering")
-if st.button("Suggest Feature Engineering"):
-    if st.session_state['data'] is not None:
-        response = chat_with_llm("Suggest feature engineering steps for the dataset.", selected_model)
-        st.markdown("#### Feature Engineering Suggestions")
-        st.markdown(response)
-        st.session_state['messages'].append({"user": "Suggest Feature Engineering", "assistant": response})
-    else:
-        st.error("Please upload a dataset first.")
-
-# Train Model Button
-st.write("### Train a Model")
-model_name = st.text_input("Enter the model type (e.g., Random Forest, XGBoost, Decision Tree):", "Random Forest")
-target_column = st.text_input("Enter the target column for training:")
-
-if st.button("Train Model"):
-    if st.session_state['data'] is not None and target_column:
-        query = f"Generate code to train a {model_name} model using the dataset with the target variable '{target_column}'. Provide the code."
-        response = chat_with_llm(query, selected_model)
-        st.markdown("#### Model Training Code")
-        st.code(response, language="python")
-        st.session_state['messages'].append({"user": f"Train a {model_name} model", "assistant": response})
-    else:
-        st.error("Please upload a dataset and specify the target column first.")
-
-# Model Evaluation Button
-st.write("### Model Evaluation")
-if st.button("Evaluate Model"):
-    if st.session_state['data'] is not None and target_column:
-        query = f"Provide evaluation metrics for a {model_name} model trained on the target column '{target_column}'."
-        response = chat_with_llm(query, selected_model)
-        st.markdown("#### Model Evaluation Metrics")
-        st.markdown(response)
-        st.session_state['messages'].append({"user": "Evaluate Model", "assistant": response})
-    else:
-        st.error("Please upload a dataset and specify the target column first.")
-
-# Cross-Validation Button
-st.write("### Perform Cross-Validation")
-if st.button("Perform Cross-Validation"):
-    if st.session_state['data'] is not None and target_column:
-        query = f"Generate code for performing cross-validation on a {model_name} model using the target column '{target_column}'."
-        response = chat_with_llm(query, selected_model)
-        st.markdown("#### Cross-Validation Code")
-        st.code(response, language="python")
-        st.session_state['messages'].append({"user": "Perform Cross-Validation", "assistant": response})
-    else:
-        st.error("Please upload a dataset and specify the target column first.")
-
-# Clustering Button
-st.write("### Apply Clustering")
-if st.button("Apply Clustering"):
-    if st.session_state['data'] is not None:
-        response = chat_with_llm("Suggest clustering techniques (e.g., K-means) to apply to the dataset.", selected_model)
-        st.markdown("#### Clustering Suggestions")
-        st.markdown(response)
-        st.session_state['messages'].append({"user": "Apply Clustering", "assistant": response})
-    else:
-        st.error("Please upload a dataset first.")
-
-# Outlier Detection Button
-st.write("### Outlier Detection")
-if st.button("Detect Outliers"):
-    if st.session_state['data'] is not None:
-        response = chat_with_llm("Detect outliers in the dataset.", selected_model)
-        st.markdown("#### Outlier Detection Suggestions")
-        st.markdown(response)
-        st.session_state['messages'].append({"user": "Detect Outliers", "assistant": response})
-    else:
-        st.error("Please upload a dataset first.")
-
-# Data Visualization Button
+# Data Visualization Section
 st.write("### Data Visualization")
-if st.button("Generate Data Visualizations"):
-    if st.session_state['data'] is not None:
-        response = chat_with_llm("Suggest basic data visualizations (e.g., histograms, scatter plots, correlation heatmaps) for the dataset.", selected_model)
-        st.markdown("#### Data Visualization Suggestions")
-        st.markdown(response)
-        st.session_state['messages'].append({"user": "Generate Data Visualizations", "assistant": response})
-    else:
-        st.error("Please upload a dataset first.")
+graph_type = st.selectbox("Select Graph Type", ["Bar", "Line"])
+column = st.selectbox("Select Column for Visualization", st.session_state['data'].columns.tolist() if st.session_state['data'] is not None else [])
 
-# Automated Report Button
-st.write("### Generate Automated Report")
-if st.button("Generate Automated Report"):
-    if st.session_state['data'] is not None:
-        response = chat_with_llm("Generate an automated report summarizing the dataset, models trained, and results.", selected_model)
-        st.markdown("#### Automated Report")
-        st.markdown(response, unsafe_allow_html=True)
-        st.session_state['messages'].append({"user": "Generate Automated Report", "assistant": response})
-    else:
-        st.error("Please upload a dataset first.")
+if st.button("Generate Graph"):
+    if st.session_state['data'] is not None and column:
+        plt.figure(figsize=(10, 5))
+        
+        if graph_type == "Bar":
+            st.session_state['data'][column].value_counts().plot(kind='bar')
+            plt.title(f'Bar Graph of {column}')
+        elif graph_type == "Line":
+            st.session_state['data'][column].plot(kind='line')
+            plt.title(f'Line Graph of {column}')
 
-# Time Series Analysis Button
-st.write("### Time Series Analysis")
-if st.button("Perform Time Series Analysis"):
-    if st.session_state['data'] is not None:
-        response = chat_with_llm("Suggest time series analysis techniques for the dataset.", selected_model)
-        st.markdown("#### Time Series Analysis Suggestions")
-        st.markdown(response)
-        st.session_state['messages'].append({"user": "Perform Time Series Analysis", "assistant": response})
+        plt.xlabel(column)
+        plt.ylabel('Frequency' if graph_type == "Bar" else 'Value')
+        plt.grid()
+        st.pyplot(plt)  # Display the plot in Streamlit
+        st.session_state['messages'].append({"user": f"Generate {graph_type} graph for {column}", "assistant": "Graph generated."})
     else:
-        st.error("Please upload a dataset first.")
+        st.error("Please upload a dataset and select a column first.")
 
 # Clear Conversation Button
 if st.button("Clear Conversation"):
