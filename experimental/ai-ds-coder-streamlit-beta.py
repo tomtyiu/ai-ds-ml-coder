@@ -3,9 +3,10 @@
 
 import streamlit as st
 import pandas as pd
-from openai import OpenAI
+from openai import OpenAI 
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv 
+
 
 # Load environment variables
 load_dotenv()
@@ -26,21 +27,21 @@ if 'messages' not in st.session_state:
 
 # Function to communicate with LLM using Hugging Face API
 def chat_with_llm(query):
-    chat_completion = client.chat.completions.create(
-        model="o1-mini-2024-09-12",  # or OpenAI model or Episteme AI model, for super advance reasoning, use o1-preview
-        messages=[{"role": "user", "content": query}],
-        top_p=0.6,
-        temperature=0.6,
-        max_tokens=300,
-        stream=True
-    )
+    try:
+        # Call the API without streaming
+        completion = client.chat.completions.create(
+            model="o1-mini-2024-09-12",  # Replace with the correct model name
+            messages=[{"role": "user", "content": query}]
+            # Remove stream=True as it is not supported by this model
+        )
 
-    # Collect response content
-    response_content = ""
-    for message in chat_completion:
-        response_content += message.choices[0].delta.content
+        # Get the response content
+        response_content = completion.choices[0].message.content
+        return response_content.strip()
+    except Exception as e:
+        st.error(f"Error communicating with the model: {e}")
+        return "An error occurred while trying to get a response."
 
-    return response_content
 
 # Function to load and process data from CSV
 def load_data(uploaded_file):
@@ -86,7 +87,7 @@ for message in st.session_state['messages']:
 st.write("### Generate EDA Report")
 if st.button("Generate EDA Report"):
     if st.session_state['data'] is not None:
-        response = chat_with_llm("Generate an EDA report for the dataset in HTML format.")
+        response = chat_with_llm("Write a EDA report for the dataset in HTML format.")
         st.markdown("#### EDA Report")
         st.markdown(response, unsafe_allow_html=True)
         st.session_state['messages'].append({"user": "Generate EDA Report", "assistant": response})
