@@ -1,4 +1,4 @@
-# Created by Thomas Yiu
+# Created by Thomas Yiu 
 # AI Data Science Assistant using Streamlit
 
 import streamlit as st
@@ -6,7 +6,6 @@ import pandas as pd
 from openai import OpenAI 
 import os
 from dotenv import load_dotenv 
-
 
 # Load environment variables
 load_dotenv()
@@ -26,11 +25,11 @@ if 'messages' not in st.session_state:
     st.session_state['messages'] = []
 
 # Function to communicate with LLM using Hugging Face API
-def chat_with_llm(query):
+def chat_with_llm(query, model):
     try:
         # Call the API without streaming
         completion = client.chat.completions.create(
-            model="o1-mini-2024-09-12",  # Replace with the correct model name
+            model=model,
             messages=[{"role": "user", "content": query}]
             # Remove stream=True as it is not supported by this model
         )
@@ -41,7 +40,6 @@ def chat_with_llm(query):
     except Exception as e:
         st.error(f"Error communicating with the model: {e}")
         return "An error occurred while trying to get a response."
-
 
 # Function to load and process data from CSV
 def load_data(uploaded_file):
@@ -59,6 +57,15 @@ def load_data(uploaded_file):
 st.title("LLM-Powered Data Science Assistant")
 st.write("Upload your dataset and interact with the assistant to train models, generate EDA reports, and more.")
 
+# Dropdown for selecting OpenAI model
+model_options = [
+    "o1-preview-2024-09-12", 
+    "o1-mini-2024-09-12",  
+    "chatgpt-4o-latest",  
+    "gpt-4o-mini-2024-07-18"
+]
+selected_model = st.selectbox("Select OpenAI Model", model_options)
+
 # Chatbot container
 st.write("### Chat with the assistant")
 query = st.text_input("Ask something (or type a command):")
@@ -74,7 +81,7 @@ if uploaded_file:
 
 # Display chatbot interaction
 if query:
-    response = chat_with_llm(query)
+    response = chat_with_llm(query, selected_model)  # Use the selected model here
     st.session_state['messages'].append({"user": query, "assistant": response})
     st.text_input("Ask something (or type a command):", value="", key="input")  # Reset input field
 
@@ -87,7 +94,7 @@ for message in st.session_state['messages']:
 st.write("### Generate EDA Report")
 if st.button("Generate EDA Report"):
     if st.session_state['data'] is not None:
-        response = chat_with_llm("Write a EDA report for the dataset in HTML format.")
+        response = chat_with_llm("Write a EDA report for the dataset in HTML format.", selected_model)
         st.markdown("#### EDA Report")
         st.markdown(response, unsafe_allow_html=True)
         st.session_state['messages'].append({"user": "Generate EDA Report", "assistant": response})
@@ -98,7 +105,7 @@ if st.button("Generate EDA Report"):
 st.write("### Data Imputation")
 if st.button("Suggest Data Imputation"):
     if st.session_state['data'] is not None:
-        response = chat_with_llm("Suggest data imputation steps for missing values in the dataset.")
+        response = chat_with_llm("Suggest data imputation steps for missing values in the dataset.", selected_model)
         st.markdown("#### Data Imputation Suggestions")
         st.markdown(response)
         st.session_state['messages'].append({"user": "Suggest Data Imputation", "assistant": response})
@@ -109,7 +116,7 @@ if st.button("Suggest Data Imputation"):
 st.write("### Feature Engineering")
 if st.button("Suggest Feature Engineering"):
     if st.session_state['data'] is not None:
-        response = chat_with_llm("Suggest feature engineering steps for the dataset.")
+        response = chat_with_llm("Suggest feature engineering steps for the dataset.", selected_model)
         st.markdown("#### Feature Engineering Suggestions")
         st.markdown(response)
         st.session_state['messages'].append({"user": "Suggest Feature Engineering", "assistant": response})
@@ -124,7 +131,7 @@ target_column = st.text_input("Enter the target column for training:")
 if st.button("Train Model"):
     if st.session_state['data'] is not None and target_column:
         query = f"Generate code to train a {model_name} model using the dataset with the target variable '{target_column}'. Provide the code."
-        response = chat_with_llm(query)
+        response = chat_with_llm(query, selected_model)
         st.markdown("#### Model Training Code")
         st.code(response, language="python")
         st.session_state['messages'].append({"user": f"Train a {model_name} model", "assistant": response})
@@ -136,7 +143,7 @@ st.write("### Model Evaluation")
 if st.button("Evaluate Model"):
     if st.session_state['data'] is not None and target_column:
         query = f"Provide evaluation metrics for a {model_name} model trained on the target column '{target_column}'."
-        response = chat_with_llm(query)
+        response = chat_with_llm(query, selected_model)
         st.markdown("#### Model Evaluation Metrics")
         st.markdown(response)
         st.session_state['messages'].append({"user": "Evaluate Model", "assistant": response})
@@ -148,7 +155,7 @@ st.write("### Perform Cross-Validation")
 if st.button("Perform Cross-Validation"):
     if st.session_state['data'] is not None and target_column:
         query = f"Generate code for performing cross-validation on a {model_name} model using the target column '{target_column}'."
-        response = chat_with_llm(query)
+        response = chat_with_llm(query, selected_model)
         st.markdown("#### Cross-Validation Code")
         st.code(response, language="python")
         st.session_state['messages'].append({"user": "Perform Cross-Validation", "assistant": response})
@@ -159,7 +166,7 @@ if st.button("Perform Cross-Validation"):
 st.write("### Apply Clustering")
 if st.button("Apply Clustering"):
     if st.session_state['data'] is not None:
-        response = chat_with_llm("Suggest clustering techniques (e.g., K-means) to apply to the dataset.")
+        response = chat_with_llm("Suggest clustering techniques (e.g., K-means) to apply to the dataset.", selected_model)
         st.markdown("#### Clustering Suggestions")
         st.markdown(response)
         st.session_state['messages'].append({"user": "Apply Clustering", "assistant": response})
@@ -170,7 +177,7 @@ if st.button("Apply Clustering"):
 st.write("### Outlier Detection")
 if st.button("Detect Outliers"):
     if st.session_state['data'] is not None:
-        response = chat_with_llm("Detect outliers in the dataset.")
+        response = chat_with_llm("Detect outliers in the dataset.", selected_model)
         st.markdown("#### Outlier Detection Suggestions")
         st.markdown(response)
         st.session_state['messages'].append({"user": "Detect Outliers", "assistant": response})
@@ -181,7 +188,7 @@ if st.button("Detect Outliers"):
 st.write("### Data Visualization")
 if st.button("Generate Data Visualizations"):
     if st.session_state['data'] is not None:
-        response = chat_with_llm("Suggest basic data visualizations (e.g., histograms, scatter plots, correlation heatmaps) for the dataset.")
+        response = chat_with_llm("Suggest basic data visualizations (e.g., histograms, scatter plots, correlation heatmaps) for the dataset.", selected_model)
         st.markdown("#### Data Visualization Suggestions")
         st.markdown(response)
         st.session_state['messages'].append({"user": "Generate Data Visualizations", "assistant": response})
@@ -192,7 +199,7 @@ if st.button("Generate Data Visualizations"):
 st.write("### Generate Automated Report")
 if st.button("Generate Automated Report"):
     if st.session_state['data'] is not None:
-        response = chat_with_llm("Generate an automated report summarizing the dataset, models trained, and results.")
+        response = chat_with_llm("Generate an automated report summarizing the dataset, models trained, and results.", selected_model)
         st.markdown("#### Automated Report")
         st.markdown(response, unsafe_allow_html=True)
         st.session_state['messages'].append({"user": "Generate Automated Report", "assistant": response})
@@ -203,7 +210,7 @@ if st.button("Generate Automated Report"):
 st.write("### Time Series Analysis")
 if st.button("Perform Time Series Analysis"):
     if st.session_state['data'] is not None:
-        response = chat_with_llm("Suggest time series analysis techniques for the dataset.")
+        response = chat_with_llm("Suggest time series analysis techniques for the dataset.", selected_model)
         st.markdown("#### Time Series Analysis Suggestions")
         st.markdown(response)
         st.session_state['messages'].append({"user": "Perform Time Series Analysis", "assistant": response})
