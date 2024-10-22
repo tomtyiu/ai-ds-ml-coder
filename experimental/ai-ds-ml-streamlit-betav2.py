@@ -1,8 +1,14 @@
 import streamlit as st
 import pandas as pd
-from openai import OpenAI
+from openai import OpenAI 
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv 
+
+# LangChain imports
+from langchain.agents import initialize_agent
+from langchain.agents.agent_types import AgentType
+from langchain.tools import PythonREPLTool
+from langchain.llms import OpenAI
 
 # Load environment variables
 load_dotenv()
@@ -122,6 +128,17 @@ if query:
     response = chat_with_llm(query, selected_model)  # Use the selected model here
     st.session_state['messages'].append({"user": query, "assistant": response})
     st.text_input("Ask something (or type a command):", value="", key="input")  # Reset input field
+
+# New "Execute Python" functionality
+st.write("### Execute Python Query")
+user_input = st.text_input("Enter your query:")
+
+if st.button("Run"):
+    if user_input:
+        agent_response = agent.run(user_input)
+        st.write(agent_response)
+    else:
+        st.error("Please enter a query before running.")
 
 # Display messages in a chatbot-like format with custom CSS
 for message in st.session_state['messages']:
