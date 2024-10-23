@@ -24,7 +24,8 @@ This application is an AI-powered Data Science Assistant built using Streamlit. 
 
 ## Installation
 1. Clone the repository:
-   ```bash
+
+```bash
    git clone <repo_url>
    cd <repo_directory>
 ```
