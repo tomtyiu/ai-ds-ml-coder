@@ -1,109 +1,92 @@
-This is experimental Data science Streamlit Code
+# AI Data Science Assistant using Streamlit
 
+## Overview
+This application is an AI-powered Data Science Assistant built using Streamlit. It integrates OpenAI's language models to provide interactive support for data analysis, model training, exploratory data analysis (EDA), and data visualization. Users can upload datasets and interact with a chatbot that generates insights and responses for data processing and visualization tasks. Additionally, the assistant can generate comprehensive EDA reports and visualizations based on the uploaded data.
 
-# AI-Powered Data Science(DS) and Machine Learning (ML) Assistant
+## Features
+- **Upload and Load Dataset**: Upload CSV files, which are processed and made available for analysis.
+- **OpenAI Model Integration**: Select from a range of OpenAI models to interact with the chatbot for data science-related queries.
+- **Chatbot Assistant**: Ask questions or give commands to the assistant related to dataset analysis, EDA, and more.
+- **EDA Reports**: Automatically generate a detailed exploratory data analysis report for the uploaded dataset.
+- **Data Visualization**: Create visualizations (Bar and Line graphs) based on selected dataset columns.
+- **Session Management**: Retains conversation history and dataset information throughout the session.
+- **Clear Conversation**: Clear chatbot conversation history to start fresh.
+- **Preview Dataset**: View a preview of the uploaded dataset.
 
-This project provides a **Streamlit-based** user interface for interacting with an **LLM-powered Data Science Assistant**. It allows users to upload datasets, perform exploratory data analysis (EDA), train machine learning models, and even tune hyperparameters with the help of a language model. The LLM (Large Language Model) backend is powered by Hugging Face's `OpenAI`-like API for seamless integration. Easily change to OpenAI model.
-
-## OpenAI models: 
-**Complex Reasoning model** o1-preview-2024-09-12, o1-mini-2024-09-12  
-**Advance GPT model** chatgpt-4o-latest, gpt-4o-mini-2024-07-18
-
-## Features:
-- **Upload CSV Data**: Load a CSV file to perform data analysis.
-- **LLM-Powered Assistant**: Chat with the assistant for insights and help on data science tasks.
-- **Generate EDA Reports**: Automatically generate EDA reports in HTML format.
-- **Train ML Models**: Automatically generate Python code to train machine learning models based on user input.
-- **Hyperparameter Tuning**: Get suggestions for hyperparameter tuning strategies.
-- **Clear Conversation**: Reset the conversation with the assistant.
+## Requirements
+- **Python 3.7+**
+- Required Libraries:
+  - `streamlit`
+  - `pandas`
+  - `matplotlib`
+  - `openai`
+  - `python-dotenv`
 
 ## Installation
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/yourusername/ai-ds-streamlit.git
-cd ai-ds-streamlit
+1. Clone the repository:
+   ```bash
+   git clone <repo_url>
+   cd <repo_directory>
 ```
-
-Install Dependencies
-
-You will need streamlit, pandas, requests, python-dotenv, and openai. Install these using pip:
-
-```bash
-pip install streamlit pandas requests python-dotenv openai
-```
-
-Hugging Face API Setup
-
-Obtain a Hugging Face Token:
-Go to Hugging Face Settings and generate your token.
-Create a .env file:
-Add your Hugging Face token in the .env file as follows:
+Install the required dependencies:
 
 ```bash
 Copy code
-HF_TOKEN=your_huggingface_token_here
+pip install -r requirements.txt
 ```
 
-## Usage
-Start the Streamlit App: Run the following command in the terminal:
+
+Create a .env file in the root directory and add your OpenAI API key:
+
+```bash
+makefile
+OPENAI_API_KEY=your_openai_api_key_here
+```
+Run the Streamlit app:
 
 ```bash
 streamlit run app.py
 ```
 
-### Upload a CSV File:
 
-On the app interface, you'll see an option to upload a CSV file.
-Once uploaded, the assistant will acknowledge the file upload and display the number of rows and columns.
-Chat with the Assistant:
+## Usage Instructions
+1. **OpenAI API Key** Input OpenAI API Key: Enter your OpenAI API key in the sidebar to enable interaction with the assistant.
+2. **Upload Dataset**: Use the file uploader to upload a CSV file. The dataset will be loaded, and basic information will be displayed.
+3. **Chat with the Assistant**: Ask questions or enter commands in the chatbox to interact with the AI assistant. It can generate dataset summaries, model suggestions, or other relevant insights.
+4. **Generate EDA Report**: Click "Generate Comprehensive EDA Report" to get an automatic exploratory data analysis report of the dataset.
+5. **Data Visualization**: Select a graph type (Bar or Line) and a column from the dataset to generate the respective visualization.
+6. **Clear Conversation**: Use the "Clear Conversation" button to reset the chat history.
+7. **Preview Dataset**: View the first few rows of the uploaded dataset in the preview section.
 
-In the Chat section, you can ask data science-related questions or provide commands, such as requesting an EDA report or help with training a model.
+## Key Functionalities
+Chat Function with LLM
+The app allows users to communicate with a large language model (LLM) using OpenAI's API. Queries can be related to data analysis, visualization, or general commands, and the assistant will respond with relevant outputs or actions.
 
-### Generate EDA Report:
+## Dataset Upload and Processing
+CSV files can be uploaded, and the data is processed using pandas. The app provides a preview and summary of the dataset upon loading.
 
-Click the "Generate EDA Report" button after uploading your dataset, and the assistant will provide an HTML-formatted EDA report.
-The assistant will describe key features of the dataset, missing values, statistics, and common visualizations (e.g., histograms, heatmaps).
+## EDA Report Generation
+An automatic EDA report summarizes key statistical metrics for the dataset, including both categorical and numerical data, generated on-demand by the AI assistant.
 
-### Train a Machine Learning Model:
+## Data Visualization
+The app supports Bar and Line chart generation for selected columns using matplotlib. Users can easily switch between visualization types and columns.
 
-Enter a model type (e.g., random_forest, XGBoost, etc.) and specify the target column of the dataset.
-Click "Train Model," and the assistant will generate Python code that can be used to train the specified model.
-Hyperparameter Tuning:
+## Error Handling
+The application provides user-friendly error messages for:
 
-Click "Suggest Hyperparameter Tuning" to get suggestions for hyperparameter tuning for a random_forest or other models.
+Incorrect or missing OpenAI API keys.
+Issues during dataset loading or processing.
+Invalid model selections.
+Customization
+To customize the app:
 
-### Clear Conversation:
-You can clear the chat by clicking "Clear Conversation."
+## Modify the list of available AI models in the model_options variable.
+Add additional graph types or analysis tools to enhance the visualization capabilities.
+Expand the chatbot's functionality to address more specific data science tasks.
 
+## Acknowledgements
+OpenAI for the powerful AI models used in this application.
+Streamlit for providing the framework for building interactive web applications.
 
-### Example Commands
-Here are some example commands you can ask the assistant:
-
-EDA Report: "Generate an EDA report for this dataset."
-Train a Model: "Generate code to train a random forest model using the dataset with the target variable 'label'."
-Hyperparameter Tuning: "Suggest hyperparameter tuning for a random forest model."
-General Query: "What is deep learning?"
-Configuration
-The assistant is powered by Hugging Face's OpenAI-like API. You can replace the model name in the code with a model of your choice, such as tgi or EpistemeAI/Fireball-Meta-Llama-3.1-8B-Instruct-Agent-0.003-128K-code-ds.
-Modify the HF_TOKEN in the .env file with your Hugging Face API token.
-
-## Generate graph
-- Generate bar or line graph of the CSV file for easy analysis 
-
-## Previewof table of the CSV 
-- provide preview table of the CSV file
-
-### License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-### Troubleshooting
-- Invalid API Key: Make sure your .env file contains the correct Hugging Face token.
-- File Upload Errors: Ensure that you are uploading a valid CSV file.
-Chat Errors: If the assistant doesn't respond correctly, check the API rate limits on your Hugging Face account.
-
-# Price
-- Must pay $0.8 dollars to use the LLM, please contact for base URL to use for Huggingface model
-- For OpenAI, please contact us for price and key
-
+## License
+This project is licensed under the MIT License.
