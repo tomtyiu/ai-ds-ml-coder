@@ -29,7 +29,7 @@ This application is an AI-powered Data Science Assistant built using Streamlit. 
    git clone <repo_url>
    cd <repo_directory>
 ```
-Setup python virtual environment
+Setup python virtual environment for safety
 ```bash
 pip install virtualenv
 virtualenv <directory>
