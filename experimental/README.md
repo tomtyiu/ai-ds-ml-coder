@@ -28,10 +28,15 @@ This application is an AI-powered Data Science Assistant built using Streamlit. 
    git clone <repo_url>
    cd <repo_directory>
 ```
-Install the required dependencies:
-
+Setup python virtual environment
 ```bash
-Copy code
+pip install virtualenv
+virtualenv <directory>
+cd <directory>\Scripts\activate
+```
+
+Install the required dependencies:
+```bash
 pip install -r requirements.txt
 ```
 
