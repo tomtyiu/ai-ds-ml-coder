@@ -9,3 +9,5 @@ langchain-community
 matplotlib
 pandas
 plotly
+streamlit-monaco
+streamlit-elements
