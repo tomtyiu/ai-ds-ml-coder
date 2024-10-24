@@ -8,3 +8,4 @@ streamlit-feedback
 langchain-community
 matplotlib
 pandas
+plotly
