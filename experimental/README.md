@@ -90,6 +90,9 @@ To customize the app:
 Add additional graph types or analysis tools to enhance the visualization capabilities.
 Expand the chatbot's functionality to address more specific data science tasks.
 
+## Monaco Editor
+The st_monaco component from the streamlit_monaco package enables integration of the Monaco Editor (the editor used in Visual Studio Code) into Streamlit applications. This package allows for a flexible code editing experience within Streamlit, with support for syntax highlighting across various programming languages, dynamic resizing, and theme selection (dark or light mode based on Streamlit's theme settings). The editor can be customized for language-specific editing, and the content can be accessed or manipulated with Streamlit's built-in functions.
+ 
 ## Acknowledgements
 OpenAI for the powerful AI models used in this application.
 Streamlit for providing the framework for building interactive web applications.
